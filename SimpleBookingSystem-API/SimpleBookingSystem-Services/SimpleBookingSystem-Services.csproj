@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>SimpleBookingSystem_Services</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SimpleBookingSystem-DAL\SimpleBookingSystem-DAL.csproj" />
+    <ProjectReference Include="..\SimpleBookingSystem-DTO\SimpleBookingSystem-DTO.csproj" />
+    <ProjectReference Include="..\SimpleBookingSystem-Exceptions\SimpleBookingSystem-Exceptions.csproj" />
+    <ProjectReference Include="..\SimpleBookingSystem-Mappers\SimpleBookingSystem-Mappers.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>SimpleBookingSystem_Mappers</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SimpleBookingSystem-DomainModels\SimpleBookingSystem-DomainModels.csproj" />
+    <ProjectReference Include="..\SimpleBookingSystem-DTO\SimpleBookingSystem-DTO.csproj" />
+  </ItemGroup>
+
+</Project>
