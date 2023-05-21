@@ -1,0 +1,50 @@
+<section>
+  <button class="btn btn-primary button-x-style-dialog" (click)="closeDialog()">
+    X
+  </button>
+  <h1>Booking {{ resource.title }}</h1>
+
+  <form
+    class="form-style-dialog"
+    [formGroup]="bookingForm"
+    (ngSubmit)="submitBooking()"
+  >
+    <mat-form-field>
+      <input
+        formControlName="dateFrom"
+        matInput
+        type="datetime-local"
+        placeholder="Date From"
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        formControlName="dateTo"
+        matInput
+        type="datetime-local"
+        placeholder="Date To"
+      />
+    </mat-form-field>
+    <div class="input-group mb-3">
+      <span class="input-group-text" id="inputGroup-sizing-default"
+        >Quantity</span
+      >
+      <input
+        type="number"
+        class="form-control"
+        aria-label="Sizing example input"
+        aria-describedby="inputGroup-sizing-default"
+        formControlName="bookedQuantity"
+      />
+    </div>
+
+    <input type="hidden" formControlName="resourceId" />
+    <button
+      type="submit"
+      [disabled]="bookingForm.invalid"
+      class="btn btn-primary btn-lg submit-button-dialog"
+    >
+      Book
+    </button>
+  </form>
+</section>
