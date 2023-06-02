@@ -18,4 +18,13 @@ export class BookingService {
       booking
     );
   }
+
+  getMyBookings(id: number): Observable<any> {
+    return this.http.get(
+      bookingResourceUrl.baseUrl +
+        bookingResourceUrl.bookingCont +
+        'bookings/user/' +
+        id
+    );
+  }
 }

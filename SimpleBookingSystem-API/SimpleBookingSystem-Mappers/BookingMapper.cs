@@ -14,7 +14,9 @@ namespace SimpleBookingSystem_Mappers
                 DateTo = resource.DateRange.DateTo,
                 BookedQuantity = resource.BookedQuantity,
                 ResourceId = resource.ResourceId,
-                UserId = resource.UserId
+                UserId = resource.UserId,
+                DateRangeId = resource.DateRangeId,
+                ResourceName = resource.Resource.Title
             };
         }
 
@@ -25,12 +27,14 @@ namespace SimpleBookingSystem_Mappers
                 Id = resource.Id,
                 DateRange = new DateRange()
                 {
+                    Id = resource.DateRangeId,
                     DateFrom = resource.DateFrom,
                     DateTo = resource.DateTo,
                 },
                 BookedQuantity = resource.BookedQuantity,
                 ResourceId = resource.ResourceId,
-                UserId = resource.UserId
+                UserId = resource.UserId,
+                DateRangeId = resource.DateRangeId
             };
         }
     }

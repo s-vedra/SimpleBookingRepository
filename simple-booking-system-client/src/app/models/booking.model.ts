@@ -5,4 +5,6 @@ export interface Booking {
   bookedQuantity: number;
   resourceId: number;
   userId: number;
+  dateRangeId: number;
+  resourceName: string;
 }

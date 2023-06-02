@@ -46,6 +46,7 @@ export class BookingComponentComponent implements OnInit {
     this.booking = this.bookingForm.value;
     this.booking.resourceId = this.resource.id;
     this.booking.userId = this.user.id;
+    this.booking.resourceName = this.resource.title;
     this.bookingService.saveBooking(this.booking).subscribe({
       next: () => {
         this.notificationService.successNotification();

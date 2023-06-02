@@ -13,17 +13,60 @@ namespace SimpleBookingSystem_Services.Implementation
         private readonly IResourceRepository _resourceRepository;
         private readonly IDateRangeRepository _dateRangeRepository;
         private readonly IBookingQueryService _bookingQueryService;
-        private readonly IEmailService _emailService;
-        public BookingService(IBookingRepository bookingRepository, IResourceRepository resourceRepository, IDateRangeRepository dateRangeRepository, IBookingQueryService bookingQueryService, IEmailService emailService)
+        public BookingService(IBookingRepository bookingRepository,
+            IResourceRepository resourceRepository,
+            IDateRangeRepository dateRangeRepository,
+            IBookingQueryService bookingQueryService)
         {
             _bookingRepository = bookingRepository;
             _resourceRepository = resourceRepository;
             _dateRangeRepository = dateRangeRepository;
             _bookingQueryService = bookingQueryService;
-            _emailService = emailService;
         }
 
-        public void SaveBookingAndSendEmailToAdmin(BookingDTO bookingDto)
+        public void CancelBookingAndRemoveDateRange(int id)
+        {
+            var booking = _bookingRepository.GetEntity(id);
+            var dateRange = _dateRangeRepository.GetEntity(booking.DateRangeId);
+            _bookingRepository.RemoveEntity(booking);
+            _dateRangeRepository.RemoveEntity(dateRange);
+        }
+
+        public IEnumerable<BookingDTO> GetAllBookings(int id)
+        {
+            var bookings = _bookingRepository.GetEntities().Where(x => x.UserId == id);
+            if (!bookings.Any())
+                throw new CoreException("No bookings");
+            return bookings.Select(x => 
+            new Booking()
+            {   
+                Id = x.Id,
+                BookedQuantity = x.BookedQuantity,
+                DateRange = _dateRangeRepository.GetEntity(x.DateRangeId),
+                Resource = _resourceRepository.GetEntity(x.ResourceId),
+                DateRangeId = x.DateRangeId,
+                ResourceId = x.ResourceId
+            }).Select(x => x.ToDto());
+        }
+
+        public IEnumerable<BookingDTO> GetAllBookings()
+        {
+            var bookings = _bookingRepository.GetEntities();
+            if (!bookings.Any())
+                throw new CoreException("No bookings");
+            return bookings.Select(x =>
+            new Booking()
+            {
+                Id = x.Id,
+                BookedQuantity = x.BookedQuantity,
+                DateRange = _dateRangeRepository.GetEntity(x.DateRangeId),
+                Resource = _resourceRepository.GetEntity(x.ResourceId),
+                DateRangeId = x.DateRangeId,
+                ResourceId = x.ResourceId
+            }).Select(x => x.ToDto());
+        }
+
+        public void SaveBooking(BookingDTO bookingDto)
         {
             var booking = bookingDto.ToDomain();
             var rangeToCheck = new DateRange()
@@ -35,18 +78,22 @@ namespace SimpleBookingSystem_Services.Implementation
             var bookings = _bookingRepository.GetEntities().Where(x => x.ResourceId == booking.ResourceId).ToList();
             var ranges = _dateRangeRepository.GetEntities().ToList();
 
-            var overlappingBookings = _bookingQueryService.GetOverlappingBookings(rangeToCheck,bookings, ranges);
+            var overlappingBookings = _bookingQueryService.GetOverlappingBookings(rangeToCheck, bookings, ranges);
             CheckResourceAvailability(resource, booking, overlappingBookings);
-            var bookingId = _bookingRepository.AddEntity(booking);
-            _emailService.SendEmailForReceivedBooking(bookingId);
+            _bookingRepository.AddEntity(booking);
+        }
+
+        public void UpdateBookingOrDateRange(BookingDTO bookingDto)
+        {
+            var booking = bookingDto.ToDomain();
+            _dateRangeRepository.UpdateEntity(booking.DateRange);
+            _bookingRepository.UpdateEntity(booking);
         }
 
         private void CheckResourceAvailability(Resource resource, Booking booking, List<Booking> overlappingBookings)
         {
             if (!IsResourceAvailable(resource, booking, overlappingBookings))
-            {
                 throw new CoreException("There are no bookings available");
-            }
         }
 
         private bool IsResourceAvailable(Resource resource, Booking booking, List<Booking> existingBookings)

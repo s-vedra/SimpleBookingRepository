@@ -14,7 +14,6 @@ namespace SimpleBookingSystem_Tests.ServiceTests
         private readonly Mock<IResourceRepository> _resourceRepository;
         private readonly Mock<IDateRangeRepository> _dateRangeRepository;
         private readonly Mock<IBookingQueryService> _bookingQueryService;
-        private readonly Mock<IEmailService> _emailService;
         private readonly IBookingService _bookingService;
         private List<Booking> Bookings { get; set; }
         private List<DateRange> DateRanges { get; set; }
@@ -24,18 +23,16 @@ namespace SimpleBookingSystem_Tests.ServiceTests
             _resourceRepository = new Mock<IResourceRepository>();
             _dateRangeRepository = new Mock<IDateRangeRepository>();
             _bookingQueryService = new Mock<IBookingQueryService>();
-            _emailService = new Mock<IEmailService>();
             _bookingService = new BookingService(_bookingRepository.Object,
                 _resourceRepository.Object,
                 _dateRangeRepository.Object,
-                _bookingQueryService.Object,
-                _emailService.Object);
+                _bookingQueryService.Object);
             Bookings = GetBookings();
             DateRanges = GetDateRanges();
         }
 
         [Fact(DisplayName = "Should save booking and send email to admin")]
-        public void ShouldSaveBookingAndSendEmailToAdmin_SaveBookingAndSendEmailToAdmin()
+        public void ShouldSaveBookingAndSendEmailToAdmin_SaveBooking()
         {
             //Arrange
             var bookingDto = new BookingDTO
@@ -69,7 +66,7 @@ namespace SimpleBookingSystem_Tests.ServiceTests
                .Returns(3);
 
             // Act
-            _bookingService.SaveBookingAndSendEmailToAdmin(bookingDto);
+            _bookingService.SaveBooking(bookingDto);
 
             // Assert
             _bookingRepository.Verify(x => x.AddEntity(It.IsAny<Booking>()), Times.Once);
@@ -114,7 +111,7 @@ namespace SimpleBookingSystem_Tests.ServiceTests
                 .Returns(10);
 
             //Act and Assert
-            Assert.Throws<CoreException>(() => _bookingService.SaveBookingAndSendEmailToAdmin(bookingDto));
+            Assert.Throws<CoreException>(() => _bookingService.SaveBooking(bookingDto));
         }
 
         private List<Booking> GetBookings()

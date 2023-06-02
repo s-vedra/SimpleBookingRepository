@@ -19,7 +19,6 @@ namespace SimpleBookingSystem_Utilities
             service.AddScoped<IBookingQueryService, BookingQueryService>();
             service.AddScoped<IUserRepository, UserRepository>();
             service.AddScoped<IUserService, UserService>();
-            service.AddScoped<IEmailService, EmailService>();
             return service;
         }
     }

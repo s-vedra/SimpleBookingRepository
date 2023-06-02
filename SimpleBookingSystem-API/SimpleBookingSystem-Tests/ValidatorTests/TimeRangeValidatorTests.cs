@@ -1,5 +1,5 @@
 ﻿using SimpleBookingSystem_DomainModels;
-using SimpleBookingSystem_Services.Implementation;
+using SimpleBookingSystem_Services.ValidatorUtility;
 
 namespace SimpleBookingSystem_Tests.TimeRangeValidatorTests
 {

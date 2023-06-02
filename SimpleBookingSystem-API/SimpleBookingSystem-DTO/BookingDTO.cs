@@ -10,6 +10,8 @@ namespace SimpleBookingSystem_DTO
         public int BookedQuantity { get; set; }
         public int ResourceId { get; set; }
         public int UserId { get; set; }
+        public int DateRangeId { get; set; }
+        public string ResourceName { get; set; }
 
         public bool ValidateBooking()
         {

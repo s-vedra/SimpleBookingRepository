@@ -32,5 +32,18 @@ namespace SimpleBookingSystem_DAL.Implementation
             else
                 return resource;
         }
+
+        public void RemoveEntity(Resource entity)
+        {
+            _dataContext.Resources.Remove(entity);
+            _dataContext.SaveChanges();
+        }
+
+        public void UpdateEntity(Resource entity)
+        {
+            var resource = GetEntity(entity.Id);
+            _dataContext.Entry(resource).CurrentValues.SetValues(entity);
+            _dataContext.SaveChanges();
+        }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using SimpleBookingSystem_DomainModels;
 
-namespace SimpleBookingSystem_Services.Implementation
+namespace SimpleBookingSystem_Services.ValidatorUtility
 {
     public static class TimeRangeValidator
     {

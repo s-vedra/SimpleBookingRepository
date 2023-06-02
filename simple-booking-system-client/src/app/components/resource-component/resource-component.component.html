@@ -1,28 +1,30 @@
-<div class="table-style">
-  <h1 class="heading-style">Resources</h1>
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th scope="col">Id</th>
-        <th scope="col">Name</th>
-        <th scope="col"></th>
-        <th scope="col">Availability</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let resource of resources">
-        <td>{{ resource.id }}</td>
-        <td>{{ resource.title }}</td>
-        <td>
-          <button
-            class="btn btn-primary button-style"
-            (click)="openDialog(resource)"
-          >
-            Book here
-          </button>
-        </td>
-        <td>{{ resource.quantity }}</td>
-      </tr>
-    </tbody>
-  </table>
+<div class="resource-component-style">
+  <div class="table-style">
+    <h1 class="heading-style">Resources</h1>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Name</th>
+          <th scope="col"></th>
+          <th scope="col">Availability</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let resource of resources">
+          <td>{{ resource.id }}</td>
+          <td>{{ resource.title }}</td>
+          <td>
+            <button
+              class="btn btn-primary button-style"
+              (click)="openDialog(resource)"
+            >
+              Book here
+            </button>
+          </td>
+          <td>{{ resource.quantity }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

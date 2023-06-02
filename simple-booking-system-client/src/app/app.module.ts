@@ -15,17 +15,29 @@ import {
   MAT_MOMENT_DATE_ADAPTER_OPTIONS,
 } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MybookingsComponent } from './components/booking-component/my-bookings-component/mybookings/mybookings.component';
+import { HeaderComponent } from './components/header-component/header/header.component';
+import { RouterModule, Routes } from '@angular/router';
+
+const appRoutes: Routes = [
+  { path: '', component: ResourceComponentComponent },
+  { path: 'booking', component: ResourceComponentComponent },
+  { path: 'user/bookings', component: MybookingsComponent },
+];
 
 @NgModule({
   declarations: [
     AppComponent,
     ResourceComponentComponent,
     BookingComponentComponent,
+    MybookingsComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    RouterModule.forRoot(appRoutes),
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatDialogModule,

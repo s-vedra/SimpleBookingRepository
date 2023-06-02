@@ -1,0 +1,8 @@
+<ul *ngFor="let booking of bookings">
+  <li>Date From: {{ booking.dateFrom }}</li>
+  <li>Date To: {{ booking.dateTo }}</li>
+  <li>Booked Quantity: {{ booking.bookedQuantity }}</li>
+  <li>Resource Name: {{ booking.resourceName }}</li>
+  <button class="btn btn-warning">Update</button>
+  <button class="btn btn-danger">Cancel</button>
+</ul>

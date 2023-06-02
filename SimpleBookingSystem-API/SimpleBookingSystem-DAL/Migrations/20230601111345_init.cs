@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -16,10 +17,10 @@ namespace SimpleBookingSystem_DAL.Migrations
                 name: "DateRange",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    DateFrom = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    DateTo = table.Column<DateTime>(type: "TEXT", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DateFrom = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateTo = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -30,10 +31,10 @@ namespace SimpleBookingSystem_DAL.Migrations
                 name: "Resource",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Title = table.Column<string>(type: "TEXT", nullable: false),
-                    Quantity = table.Column<int>(type: "INTEGER", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -44,11 +45,11 @@ namespace SimpleBookingSystem_DAL.Migrations
                 name: "User",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
-                    LastName = table.Column<string>(type: "TEXT", nullable: false),
-                    Email = table.Column<string>(type: "TEXT", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -59,12 +60,12 @@ namespace SimpleBookingSystem_DAL.Migrations
                 name: "Booking",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    DateRangeId = table.Column<int>(type: "INTEGER", nullable: false),
-                    BookedQuantity = table.Column<int>(type: "INTEGER", nullable: false),
-                    ResourceId = table.Column<int>(type: "INTEGER", nullable: false),
-                    UserId = table.Column<int>(type: "INTEGER", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DateRangeId = table.Column<int>(type: "int", nullable: false),
+                    BookedQuantity = table.Column<int>(type: "int", nullable: false),
+                    ResourceId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

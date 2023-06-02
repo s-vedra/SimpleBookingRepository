@@ -1,7 +1,7 @@
 ﻿using SimpleBookingSystem_DomainModels;
 using SimpleBookingSystem_Exceptions;
 using SimpleBookingSystem_Services.Abstraction;
-using SimpleBookingSystem_Services.Implementation;
+using SimpleBookingSystem_Services.ValidatorUtility;
 
 namespace SimpleBookingSystem_Services.Queries
 {

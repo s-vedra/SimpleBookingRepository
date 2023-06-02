@@ -10,3 +10,8 @@
   margin-left: 2em;
   border-radius: 50px;
 }
+
+.resource-component-style {
+  display: flex;
+  justify-content: center;
+}
